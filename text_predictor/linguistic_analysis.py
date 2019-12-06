@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import sys
 import random
 import re
-
+from pprint import pprint
 
 NBR_ITER = 10000
 
@@ -120,14 +120,14 @@ def get_linguistic_analysis(original, generated):
     # Average Line length
     ll = 0
     nbr_line = 0
-    for line in original.split("\n"):
+    for line in original.split(" "):
         ll += len(line)
         nbr_line += 1
     data["line_length_ori"] = ll / nbr_line
 
     ll = 0
     nbr_line = 0
-    for line in generated.split("\n"):
+    for line in generated.split(" "):
         ll += len(line)
         nbr_line += 1
     data["line_length_gen"] = ll / nbr_line
@@ -187,6 +187,7 @@ def plot(data, x_label, y_label, title):
 
 
 def main():
+    iteration_evolution = []
     d = analysis_of_generation()
     for i in range(0,NBR_ITER):
         tmp = analysis_of_generation()
@@ -194,11 +195,18 @@ def main():
             if type(d[x]) is set or type(y) is set:
                 d[x] = (d[x].union(tmp[x]))
             d[x] = (d[x] + tmp[x]) / 2
+            iteration_evolution.append([i,tmp])
 
     print("Number of iterations of the analysis : " + str(NBR_ITER))
     print("-------------------------------------------------")
     for x, y in d.items():
         print(str(x) + " : " + str(y))
+
+    with open(data_dir + "/analysis_evolution.txt", mode = "a", encoding = 'utf-8') as anal_evolution:
+        for i in range(0, NBR_ITER):
+            anal_evolution.write(str(iteration_evolution[i]))
+            anal_evolution.write("\n")
+
 
 if __name__ == '__main__':
     main()
