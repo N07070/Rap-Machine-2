@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+*.local
+text_predictor/data/kanye/tensorboard
+text_predictor/data/reuters/tensorboard
+text_predictor/data/hackernews/tensorboard
+text_predictor/data/wikipedia/tensorboard
+text_predictor/data/sherlock/tensorboard
+text_predictor/data/darwin/tensorboard
+text_predictor/data/shakespeare/tensorboard
+text_predictor/data/war_and_peace/tensorboard

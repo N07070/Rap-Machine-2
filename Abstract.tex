@@ -1,0 +1,36 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{url}
+
+
+\title{Rap and Text generation\newline\ How a rap text can be generated considering the rhyming, metrical, and lexical questions}
+\date{Octobre 2019}
+\author{E. Partouche \and H. Hamila \and N. Perdriau}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Abstract}
+
+In this paper, we will aim to show how we can use a Long Short-Term Memory Language (LSTM) to generate a rap text or to create a “rap machine”, including the generation of diverse recurrent requirements for this kind of texts such as rhymes, rhythm and a diverse vocabulary. \newline
+
+A large part of the previous studies on the generation of text \cite{sutskever_generating_nodate} have as basis a Neural network, especially Recurrent Neural Networks (RNN): when a Neural Network is a circuit of artificial neurons made to solve artificial intelligence (AI) problems, a RNN, still composed of Neural Networks, can remember them because they are recurrent but encounters some limits. This is why the LSTM model appears to be more effective within the scope of text generation \cite{chollet_deep_2018} \cite{raiman_nano_2015} \cite{surma_text_2018} : it has the possibility to correct the vanishing gradient problem of the RNN and thus learning what to remember and what to forget. An interesting work was made on the use of ghostwriting through LSTM  \cite{potash_ghostwriter:_2015} : the goal is to give the impression that a rapper has produced a new song, by reproducing his style of writing. \newline
+
+It is necessary to base our generation on a pre-existing set of lyrics from one or several artists on which we train our model. We also considered the differents ways of predicting the next character, the next word or the next line. As they are several ways of doing so, we have shown some interest in the way Ruslan Nikolaev \cite{nikolaev_generating_2018} \cite{nikolaev_drake-lyric-generator_2018} showed the effectiveness of the character-level model in 2018. Also, Hirjee and Brown have created a rhyme detection tool based on probabilistic model.\cite{hirjee_using_2010} \newline
+
+Still, methods to estimate the quality of generated lyrics are noted by Potash, Romanov and Rumshisky in 2015 and Malmi and his colleagues in 2016 \cite{malmi_dopelearning:_2016}, considering the style of the rapper and the rhyme density. Still, the text has to answer to some considerations such as the occurrence of linguistic phenomena as lexis and phonetics, even if most of the time, the program elaborated appears to give a “word salad”   \cite{oliveira_automatic_nodate} \cite{paupier_how_2018}. \newline
+
+This is why using the CMU Pronouncing Dictionary appears to be essential \cite{hirjee_using_2010}, as it make it possible for us to capture the global meaning of a group of words. One of the goal of this research is to have a nicely generated pronunciation at the same time. Finally, Malmi in 2016 also considers the length of verses in a rap text generated and all the kind of rhymes that we can find in it. This work, then, will be a mixture of all of these previous works, trying to produce a more precise model for rap lyrics generation, including considerations on metric and length, phonemes, question of predictions and judgment on the uniqueness of the production. Then, we will intend to present a study of a generated ghostswritten text based on some Kayne West's lyrics, considering the accentuation on syllables of this text, the metric and the rhymes having yet partially been studied, as the lexical aspect, another of our goal being to produce a coherent new rap text, being as coherent as the Kayne West's ones. \newline
+
+\section{Data and Methods}
+
+One of the main exercices we had to perfom was writing a model in Python, using the TensorFlow library and a RNN, that would take into account our needs. This program is available for free, under the GPLv3 licence, and is available with this article. In it, we have added the CMU Pronouncing Dictionnary, allowing us to read the generated text produced with the good accents, considering the word's syllable(s) and the metric of the setence, the lexical stress playing also a role in the accentuation of words. Moreover, a code allowing us to recognize the rhyming syllables at the and of lines was introduced. The intial set of lyrics came from Rap Genius, where we downloaded the lyrics thanks to a scraper \cite{paupier_raplyrics-scraper_2018}, hoping to produce ghostwritten texts, as if Kayne West had produced a new song while he's dead. In this way, we calculated the similarity fo the verses with the verses generated and the verses of Kayne West, in order to see if our generated lyrics were the most novelest plus a calculation of rhyme density enabling us to produce rhyme types and rhyme frequency resembling to the artist ones, or even better to the artist’s obtained average. Then, we trained the model on a computer with a nVidia© GTX 760 GPU card, 12Gb of RAM, and a Intel©  i5-3570K CPU @ 3.40GHz for about 2 600 000 iterations. The training took one afternoon, while using the computer at the same time to analyse the results. You can see a example of the evolution through the iterations in the poster accompagning our research, as well as an example of generated lyrics.
+
+\bibliography{References}
+\bibliographystyle{ieeetr}
+
+\end{document}

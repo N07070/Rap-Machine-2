@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Arch Linux)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Abstract.aux
+The style file: ieeetr.bst
+Database file #1: References.bib
+Warning--empty journal in sutskever_generating_nodate
+Warning--empty year in sutskever_generating_nodate
+Warning--empty journal in nikolaev_generating_2018
+Warning--empty journal in oliveira_automatic_nodate
+Warning--empty year in oliveira_automatic_nodate
+Warning--empty journal in paupier_how_2018
+You've used 12 entries,
+            1876 wiz_defined-function locations,
+            531 strings with 5158 characters,
+and the built_in function-call counts, 2370 in all, are:
+= -- 218
+> -- 79
+< -- 0
++ -- 33
+- -- 21
+* -- 158
+:= -- 343
+add.period$ -- 13
+call.type$ -- 12
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 18
+duplicate$ -- 119
+empty$ -- 256
+format.name$ -- 21
+if$ -- 571
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 8
+newline$ -- 40
+num.names$ -- 12
+pop$ -- 63
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 76
+stack$ -- 0
+substring$ -- 108
+swap$ -- 34
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 6
+while$ -- 23
+width$ -- 14
+write$ -- 99
+(There were 6 warnings)

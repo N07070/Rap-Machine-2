@@ -1,0 +1,53 @@
+\begin{thebibliography}{10}
+
+\bibitem{sutskever_generating_nodate}
+I.~Sutskever, J.~Martens, and G.~Hinton, ``Generating {Text} with {Recurrent}
+  {Neural} {Networks},'' p.~8.
+
+\bibitem{chollet_deep_2018}
+F.~Chollet, ``Deep {Learning} for humans,'' Dec. 2018.
+
+\bibitem{raiman_nano_2015}
+J.~Raiman, ``Nano size {Theano} {LSTM} module,'' Mar. 2015.
+
+\bibitem{surma_text_2018}
+G.~Surma, ``Text {Predictor} - {Generating} {Rap} {Lyrics},'' {\em Toronto,
+  Ontario}, Oct. 2018.
+
+\bibitem{potash_ghostwriter:_2015}
+P.~Potash, A.~Romanov, and A.~Rumshisky, ``{GhostWriter}: {Using} an {LSTM} for
+  {Automatic} {Rap} {Lyric} {Generation},'' in {\em Proceedings of the 2015
+  {Conference} on {Empirical} {Methods} in {Natural} {Language} {Processing}},
+  (Lisbon, Portugal), pp.~1919--1924, Association for Computational
+  Linguistics, 2015.
+
+\bibitem{nikolaev_generating_2018}
+R.~Nikolaev, ``Generating {Drake} {Rap} {Lyrics} using {Language} {Models} and
+  {LSTMs},'' Apr. 2018.
+
+\bibitem{nikolaev_drake-lyric-generator_2018}
+R.~Nikolaev, ``Drake-lyric-generator,'' Apr. 2018.
+
+\bibitem{hirjee_using_2010}
+H.~Hirjee and D.~Brown, ``Using {Automated} {Rhyme} {Detection} to
+  {Characterize} {Rhyming} {Style} in {Rap} {Music},'' {\em Empirical
+  Musicology Review}, vol.~5, no.~4, pp.~121--145, 2010.
+
+\bibitem{malmi_dopelearning:_2016}
+E.~Malmi, P.~Takala, H.~Toivonen, T.~Raiko, and A.~Gionis, ``{DopeLearning}:
+  {A} {Computational} {Approach} to {Rap} {Lyrics} {Generation},'' {\em
+  Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge
+  Discovery and Data Mining - KDD '16}, pp.~195--204, 2016.
+\newblock arXiv: 1505.04771.
+
+\bibitem{oliveira_automatic_nodate}
+H.~G. Oliveira, ``Automatic generation of poetry: an overview,'' p.~7.
+
+\bibitem{paupier_how_2018}
+F.~Paupier, ``How to build and deploy a lyrics generation model — framework
+  agnostic,'' Sept. 2018.
+
+\bibitem{paupier_raplyrics-scraper_2018}
+F.~Paupier, ``{RapLyrics}-{Scraper},'' Sept. 2018.
+
+\end{thebibliography}
