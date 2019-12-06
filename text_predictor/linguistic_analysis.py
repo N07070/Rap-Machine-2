@@ -1,13 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import matplotlib
 import pronouncing
-matplotlib.use("Agg")
+# matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import sys
 import random
+import re
 
-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 NBR_ITER = 10000
 
@@ -16,7 +17,7 @@ NBR_ITER = 10000
 if len(sys.argv) != 2:
     print("Please select a dataset.")
     print("Usage: python text_predictor.py <dataset>")
-    print("Available datasets: kanye, shakespeare, wikipedia, reuters, hackernews, war_and_peace, sherlock")
+    print("Available datasets: kanye")
     exit(1)
 else:
     dataset = sys.argv[1]
@@ -35,6 +36,9 @@ def file_len(fname):
             pass
     return i + 1
 
+def strip_nonalpha_chars(word):
+    return re.sub(r'[\[\]\(\)\,]', '', word)
+
 
 def get_sample_of_text(file):
     if not file:
@@ -52,23 +56,66 @@ def get_sample_of_text(file):
             sample = random.choice(list(f))
     return str(sample).rstrip()
 
+def CountSyllables(word, isName=True):
+    vowels = "aeiouy"
+    #single syllables in words like bread and lead, but split in names like Breanne and Adreann
+    specials = ["ia","ea"] if isName else ["ia"]
+    specials_except_end = ["ie","ya","es","ed"]  #seperate syllables unless ending the word
+    currentWord = word.lower()
+    numVowels = 0
+    lastWasVowel = False
+    last_letter = ""
+
+    for letter in currentWord:
+        if letter in vowels:
+            #don't count diphthongs unless special cases
+            combo = last_letter+letter
+            if lastWasVowel and combo not in specials and combo not in specials_except_end:
+                lastWasVowel = True
+            else:
+                numVowels += 1
+                lastWasVowel = True
+        else:
+            lastWasVowel = False
+
+        last_letter = letter
+
+    #remove es & ed which are usually silent
+    if len(currentWord) > 2 and currentWord[-2:] in specials_except_end:
+        numVowels -= 1
+
+    #remove silent single e, but not ee since it counted it before and we should be correct
+    elif len(currentWord) > 2 and currentWord[-1:] == "e" and currentWord[-2:] != "ee":
+        numVowels -= 1
+
+    return numVowels
+
 def get_linguistic_analysis(original, generated):
     data = {
         "nbr_sylable_gen" : 0,
         "nbr_sylable_origin" : 0,
         "line_length_gen" : 0,
         "line_length_ori" : 0,
-        "similarity_produced_verse" : 0
+        "uniq_words_gen" : 0,
+        "uniq_words_ori" : 0
     }
 
     # print(original)
     # print(generated)
     # # Number of syllabes
     # phones = [pronouncing.phones_for_word(p) for p in original.split()]
-    # data["nbr_sylable_text_origin"] = sum([pronouncing.syllable_count(p) for p in phones])
-    #
+    # print(phones)
+    nbr_syl = 0;
+    for p in original.split():
+        nbr_syl += CountSyllables(p)
+    data["nbr_sylable_origin"] = nbr_syl
+
     # phones = [pronouncing.phones_for_word(p) for p in generated.split()]
-    # data["nbr_sylable_text_gen"] = sum([pronouncing.syllable_count(p) for p in phones])
+    nbr_syl = 0;
+    for p in generated.split():
+        nbr_syl += CountSyllables(p)
+    data["nbr_sylable_gen"] = nbr_syl
+
 
     # Average Line length
     ll = 0
@@ -86,6 +133,34 @@ def get_linguistic_analysis(original, generated):
     data["line_length_gen"] = ll / nbr_line
 
     # Rhyme density
+
+    # Word map
+    # need to sort and cleanup this dict
+    # TODO: Make the whole word lowercase (test against Let Me Hold You)
+    # words_map = dict()
+    # for word in original:
+    #     plain_word = strip_nonalpha_chars(word)
+    #     if plain_word in words_map:
+    #         words_map[plain_word] += 1
+    #     else:
+    #         words_map[plain_word] = 1
+    # data["word_freq_ori"] = words_map
+    #
+    # words_map = dict()
+    # for word in generated:
+    #     plain_word = strip_nonalpha_chars(word)
+    #     if plain_word in words_map:
+    #         words_map[plain_word] += 1
+    #     else:
+    #         words_map[plain_word] = 1
+    # data["word_freq_gen"] = words_map
+
+
+    # Unique words
+    data["uniq_words_gen"] = len(set(generated.split(" ")))
+    data["uniq_words_ori"] = len(set(original.split(" ")))
+
+    # Verse similarity
 
     return data
 
@@ -107,7 +182,7 @@ def plot(data, x_label, y_label, title):
     plt.title(title)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
-    plt.savefig(data_dir + "/" + y_label + ".png", bbox_inches="tight")
+    plt.savefig(data_dir + "/" + title + ".png", bbox_inches="tight")
     plt.close()
 
 
@@ -116,6 +191,8 @@ def main():
     for i in range(0,NBR_ITER):
         tmp = analysis_of_generation()
         for x, y in tmp.items():
+            if type(d[x]) is set or type(y) is set:
+                d[x] = (d[x].union(tmp[x]))
             d[x] = (d[x] + tmp[x]) / 2
 
     print("Number of iterations of the analysis : " + str(NBR_ITER))
